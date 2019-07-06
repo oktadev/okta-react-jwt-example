@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { Container } from 'semantic-ui-react';
 
-function App() {
+import { fetchUsers } from './api';
+
+import Header from './Header';
+import Search from './Search';
+import SelectedUser from './SelectedUser';
+
+const App = () => {
+  const [users, setUsers] = React.useState(null);
+  const [selectedUser, selectUser] = React.useState(null);
+
+  React.useEffect(() => {
+    fetchUsers().then(setUsers);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header selectedUser={selectedUser} />
+      <Container style={{ paddingTop: '7em' }}>
+        <Search users={users} selectUser={selectUser} />
+        <SelectedUser selected={selectedUser} selectUser={selectUser} />
+      </Container>
     </div>
   );
-}
+};
 
 export default App;
