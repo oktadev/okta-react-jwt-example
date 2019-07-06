@@ -16,6 +16,11 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "tabWidth": 2
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -27,5 +32,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
   }
 }
