@@ -4,18 +4,6 @@ import { withAuth } from '@okta/okta-react';
 
 export const AuthContext = React.createContext();
 
-const getUserFromToken = token => {
-  if (token) {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (error) {
-      // ignore
-    }
-  }
-
-  return null;
-};
-
 export const AuthProvider = ({ children }) => {
   const [state, setState] = React.useReducer((oldState, newState) => newState, {
     loading: true,
@@ -29,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       setState({
         token,
         loading: false,
-        user: getUserFromToken(token),
+        user: await auth.getUser(),
       });
     }
   };
