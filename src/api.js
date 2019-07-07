@@ -7,4 +7,10 @@ const users = [...new Array(1000)].map(() => ({
   name: `${faker.name.firstName()} ${faker.name.lastName()}`,
 }));
 
-export const fetchUsers = async () => users;
+export const fetchUsers = async authUser =>
+  authUser && authUser.groups.includes('Admins')
+    ? users.map(user => ({
+        ...faker.helpers.userCard(),
+        ...user,
+      }))
+    : users;

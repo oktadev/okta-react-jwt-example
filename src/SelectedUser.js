@@ -14,6 +14,9 @@ export default ({ selected, selectUser }) => {
       <Image src={selected.avatar} wrapped ui={false} />
       <Card.Content>
         <Card.Header>{selected.username}</Card.Header>
+        {selected.email && <Card.Meta>{selected.email}</Card.Meta>}
+        {selected.phone && <Card.Meta>{selected.phone}</Card.Meta>}
+        {selected.address && <Card.Meta>{selected.address.city}</Card.Meta>}
       </Card.Content>
     </Card>
   );
